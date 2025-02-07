@@ -128,11 +128,13 @@ Do {
           winget install --id Google.PlatformTools --source winget
           sleep -seconds 5
 	 }
-#    "6" {Write-Host "Установка Platform-Tools" -ForegroundColor Red
-# 	  sleep -seconds 2
-# 	  sudo apt install android-sdk-platform-tools
-# 	  sleep -seconds 5
-#         }
+     "6" {Write-Host "Установка Platform-Tools через apt" -ForegroundColor Red
+	  if ( $env:POWERSHELL_DISTRIBUTION_CHANNEL -eq "MSI:Windows 10 Pro" ) {
+		throw }
+ 	  sleep -seconds 2
+ 	  sudo apt install android-sdk-platform-tools
+ 	  sleep -seconds 5
+         }
      "Q" {Write-Host "Выход..."
          Return
          }
