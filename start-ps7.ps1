@@ -33,8 +33,6 @@ Read-Host -Prompt $menuprompt
 
 
 $menu=@"
-Auto-Flash-for-RMX3834
-
 v0.0.1
 
 
@@ -53,7 +51,7 @@ Q Выход
 
 
 Do {
-    Switch (Invoke-Menu -menu $menu -title "Меню" -clear) {
+    Switch (Invoke-Menu -menu $menu -title Auto-Flash-for-RMX3834 -clear) {
      "1" {Write-Host "Перезагрузка в FastbootD" -ForegroundColor Green
           Read-Host -Prompt "Нажмите, чтобы продолжить."
           adb reboot fastboot
@@ -129,7 +127,12 @@ Do {
           sleep -seconds 1
           winget install --id Google.PlatformTools --source winget
           sleep -seconds 5
-         }
+	 }
+#    "6" {Write-Host "Установка Platform-Tools" -ForegroundColor Red
+# 	  sleep -seconds 2
+# 	  sudo apt install android-sdk-platform-tools
+# 	  sleep -seconds 5
+#         }
      "Q" {Write-Host "Выход..."
          Return
          }
