@@ -33,6 +33,10 @@ Read-Host -Prompt $menuprompt
 
 
 $menu=@"
+v0.0.1
+
+
+
 1 ADB -> FastbootD
 2 Bootloader -> FastbootD
 3 Прошивка boot
@@ -47,7 +51,7 @@ Q Выход
 
 
 Do {
-    Switch (Invoke-Menu -menu $menu -title "Меню" -clear) {
+    Switch (Invoke-Menu -menu $menu -title Auto-Flash-for-RMX3834 -clear) {
      "1" {Write-Host "Перезагрузка в FastbootD" -ForegroundColor Green
           Read-Host -Prompt "Нажмите, чтобы продолжить."
           adb reboot fastboot
@@ -58,7 +62,7 @@ Do {
           fastboot reboot fastboot
           sleep -seconds 5
           }
-     "3" {Write-Host "Прошивка Boot" -ForegroundColor Red
+     "3" {Write-Host "Прошивка Boot" -ForegroundColor Yellow
           fastboot devices
           Write-Host ""
           Write-Host "Открытие окна запроса файла..."
@@ -84,7 +88,7 @@ Do {
           fastboot flash boot_b $FilePath
           sleep -seconds 5
           }
-     "4" {Write-Host "Прошивка GSI" -ForegroundColor Yellow
+     "4" {Write-Host "Прошивка GSI" -ForegroundColor Green
           
 
           [System.Reflection.Assembly]::LoadWithPartialName("System.windows.forms") | out-null
@@ -118,13 +122,18 @@ Do {
           Read-Host -Prompt "Прошивка завершина, сбросте настройки через recovery и перезагрузитесь в систему."
           sleep -seconds 2
          }
-     "5" {Write-Host "Установка Platform-Tools через winget" -ForegroundColor Yellow
+     "5" {Write-Host "Установка Platform-Tools через winget" -ForegroundColor Green
           winget search platformtool
           sleep -seconds 1
           winget install --id Google.PlatformTools --source winget
           sleep -seconds 5
-         }
-     "Q" {Write-Host "Goodbye" -ForegroundColor Cyan
+      }
+#    "6" {Write-Host "Установка Platform-Tools" -ForegroundColor Red
+#      sleep -seconds 2
+#      sudo apt install android-sdk-platform-tools
+#      sleep -seconds 5
+#         }
+     "Q" {Write-Host "Выход..."
          Return
          }
      Default {Write-Warning "Invalid Choice. Try again."
